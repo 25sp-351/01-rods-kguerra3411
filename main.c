@@ -18,7 +18,7 @@ int compare_segments(const void *a, const void *b) {
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
-        printf("Usage: %s <rod length>\n", argv[0]);
+        printf("rod length invalid\n");
         return 1;
     }
 
@@ -32,13 +32,9 @@ int main(int argc, char *argv[]) {
     int numberOfSegments = 0;
     char userInput[100];
 
-    printf("Enter segment data as <length>, <value>. Type END to finish:\n");
+    printf("Enter segment data as <length>, <value>\n");
 
     while (fgets(userInput, sizeof(userInput), stdin)) {
-        if (strncmp(userInput, "END", 3) == 0) {
-            break;
-        }
-
         int segmentLength, segmentValue;
         if (sscanf_s(userInput, "%d, %d", &segmentLength, &segmentValue) == 2) {
             if (segmentLength > 0 && segmentValue >= 0) {
@@ -69,14 +65,14 @@ int main(int argc, char *argv[]) {
 
         if (maxSegmentsToUse > 0) {
             int valueToAdd = maxSegmentsToUse * segmentValue;
-            printf("%d @ %d = %d\n", maxSegmentsToUse, segmentLength, valueToAdd);
+            printf("\n%d @ %d = %d\n", maxSegmentsToUse, segmentLength, valueToAdd);
 
             totalValue += valueToAdd;
             remainingRodLength -= maxSegmentsToUse * segmentLength;
         }
     }
 
-    printf("\nRemaining rod length: %d\n", remainingRodLength);
+    printf("\nRemaining rod: %d\n", remainingRodLength);
     printf("Total value: %d\n", totalValue);
 
     return 0;
